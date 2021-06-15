@@ -1,10 +1,23 @@
-import React from 'react'
+import { useRouter } from 'next/router'
+import { getAllEvents } from '../../dummy-data'
+
+import EventsSearch from '../../components/events/EventsSearch'
+import EventList from '../../components/events/EventList'
 
 const AllEventsPage = () => {
+  const router = useRouter()
+  const events = getAllEvents()
+
+  const findEventsHandler = (year, month) => {
+    const fullPath = `/events/${year}/${month}`
+    router.push(fullPath)
+  }
+
   return (
-    <div>
-      <h1>All events</h1>
-    </div>
+    <>
+      <EventsSearch onSearch={findEventsHandler} />
+      <EventList items={events} />
+    </>
   )
 }
 
